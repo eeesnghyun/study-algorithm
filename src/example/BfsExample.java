@@ -1,19 +1,30 @@
 package example;
 
-class Node {
-    int data;
-    Node lt, rt;
-    public Node(int val) {
-        data = val;
-        lt = rt = null;
-    }
-}
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class BfsExample {
     Node root;
 
     public void BFS(Node root) {
+        Queue<Node> queue = new LinkedList<>();
+        queue.offer(root);
+        int level = 0;
 
+        while (!queue.isEmpty()) {
+            int length = queue.size();
+            System.out.println("Level : " + level);
+
+            for (int i = 0; i < length; i++) {
+                Node node = queue.poll();
+                System.out.print("Data : " + node.data + " ");
+
+                if (node.lt != null) queue.add(node.lt);
+                if (node.rt != null) queue.add(node.rt);
+            }
+            level++;
+            System.out.println();
+        }
     }
 
     public static void main(String[] args) {
